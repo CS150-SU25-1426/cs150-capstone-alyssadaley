@@ -10,18 +10,20 @@ using namespace std;
 
 class Plant {
   private:
+    int id;
     int age;
     string type;
     int height;
     double growSpeed;
 
   public:
-    Plant(string type);
+    Plant(string type, int uuid);
     
     int getAge();
     string getType();
     int getHeight();
     double getGrowSpeed();
+    int getId();
 
     void setType(string type);
 
