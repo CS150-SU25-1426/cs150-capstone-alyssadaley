@@ -10,20 +10,21 @@ using namespace std;
 int main() {
   Garden garden = Garden();
 
-  int choice, savings = 50;
+  int choice;
+  double savings = 50;
   bool isRepeat = true;
 
   while (isRepeat) {
-    cout << "      __/)    ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀     (\\__\n" << setw(49) << left << "   .-(__(=:   ❀" 
-        << "❀   :=)__)-." << "\n|\\ |    \\)    ❀   Welcome to the greenhouse!   ❀     (/   | /|\n"
+    cout << "      __/)    ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀    (\\__\n" << setw(49) << left << "   .-(__(=:   ❀" 
+        << "❀   :=)__)-." << "\n|\\ |    \\)    ❀   Welcome to the greenhouse!   ❀    (/    | /|\n"
         << setw(49) << left << "\\ ||          ❀" << "❀          || /" << "\n  \\|          ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀  ❀          |/\n\n";
 
-    cout << "What would you like to do? :)\n1) Plant something new (-$5.00)\n2) Sell a plant (+$5.00)\n3) Check plants + savings\n4) Pass time (1 year)\n5) Pass time (x years)\n";
+    cout << "What would you like to do? :)\n1) Plant something new (-$5.00)\n2) Plant something new but mutable! (try waiting after you plant these)  (-$5.00)\n3) Sell a plant \n4) Check plants + savings\n5) Pass time (1 year)\n6) Pass time (x years)\n";
     cin >> choice;
 
     switch (choice) {
       case 1: {
-        if (savings <= 0)
+        if (savings < 5)
           cout << "\nYou're too broke for that!\n";
         else {
 
@@ -38,24 +39,44 @@ int main() {
         break;
       }
       case 2: {
-        int flowerChoice;
-        cout << "\nWhat is the id of the flower? \n";
-        cin >> flowerChoice;
+        if (savings < 5)
+          cout << "\nYou're too broke for that!\n";
+        else {
 
-        garden.removePlant(flowerChoice);
-        //remove plant from list
-        savings += 5;
+          string flowerChoice;
+          cout << "\nWhat is the name of the flower? \n";
+          cin >> flowerChoice;
+
+          garden.addMutablePlant(flowerChoice);
+          //add plant to list
+          savings -= 5;
+        }
         break;
       }
       case 3: {
-        cout << garden << "Account Balance: $" << fixed << setprecision(2) << savings << "\n\n";
+        int flowerChoice;
+        cout << "\nWhat is the id of the flower? \n";
+        cin >> flowerChoice;
+        if (garden.hasPlant(flowerChoice)) {
+          //remove plant from list
+          savings += garden.getPlant(flowerChoice)->getPrice();
+          garden.removePlant(flowerChoice);
+        } else {
+          cout << "\nThat plant does not exist \n";
+        }
+        
+        
         break;
       }
       case 4: {
-        garden ++;
+        cout << garden << "Account Balance: $" << fixed << setprecision(2) << savings << "\n\n";
         break;
       }
       case 5: {
+        garden ++;
+        break;
+      }
+      case 6: {
         int years;
         cout << "\nHow long do you want to wait? \n";
         cin >> years;
@@ -63,7 +84,7 @@ int main() {
         garden += years;
         break;
       }
-      case 6: {
+      case 7: {
         isRepeat = false;
       }
     }

@@ -12,15 +12,17 @@ using namespace std;
 class Garden {
   private:
     int counter; 
-    vector<Plant> plants;
+    vector<Plant*> plants;
 
   public:
     Garden();
     
     void addPlant(string type);
+    void addMutablePlant(string type);
     int removePlant(int id);
-    Plant getPlant(int id);
-    vector<Plant> getPlantList();
+    bool hasPlant(int id);
+    Plant* getPlant(int id);
+    vector<Plant*> getPlantList();
 
     Garden operator++(int);
     Garden operator+=(int amount);

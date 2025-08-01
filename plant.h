@@ -13,23 +13,29 @@ class Plant {
     int id;
     int age;
     string type;
-    int height;
+    double height;
     double growSpeed;
 
   public:
-    Plant(string type, int uuid);
+    Plant(string type, int id);
     
-    int getAge();
-    string getType();
-    int getHeight();
-    double getGrowSpeed();
-    int getId();
+    int getAge() const;
+    string getType() const;
+    double getHeight() const;
+    double getGrowSpeed() const;
+    int getId() const;
 
     void setType(string type);
 
-    Plant operator++(int);
+    void virtual grow(int amount);
 
-    Plant operator+=(int amount);
+    virtual double getPrice() const;
+    
+    virtual Plant& operator++(int);
+
+    virtual Plant& operator+=(int amount);
+
+    virtual string getName() const;
 
     friend ostream& operator<<(ostream& os, const Plant& p);
 };

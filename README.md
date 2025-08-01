@@ -4,3 +4,6 @@
 
 i used past assignments and lectures as a resource
 and ascii art from google
+for the inheritence class, i used chatgpt to help me implement the pointer vectors to avoid object slicing
+
+new inventory based on grow a garden from roblox lmao
